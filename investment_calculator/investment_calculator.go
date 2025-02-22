@@ -5,9 +5,11 @@ import (
 	"math"
 )
 
+const inflationRate = 6.5
+
 func main() {
 
-	const inflationRate = 6.5
+	// const inflationRate = 6.5
 
 	// investmentAmount, years := 1000.0, 10.0
 	// years := 10.0
@@ -29,8 +31,11 @@ func main() {
 	outputText("Expected Return Rate: ")
 	fmt.Scan(&expectedReturnRate)
 
-	futureValue := investmentAmount * math.Pow(1+expectedReturnRate/100, years)
-	futureRealValue := futureValue / math.Pow(1+inflationRate/100, years)
+	futureValue, futureRealValue := calculateFutureValues(investmentAmount, expectedReturnRate, years)
+
+	// solution before switching to the calculateFutureValues function
+	// futureValue := investmentAmount * math.Pow(1+expectedReturnRate/100, years)
+	//futureRealValue := futureValue / math.Pow(1+inflationRate/100, years)
 
 	// fmt.Println("Future Value", futureValue)
 	// fmt.Println("Future Real Value", futureRealValue)
@@ -48,6 +53,25 @@ func main() {
 	`, futureValue, futureRealValue)
 }
 
+// Functions can work without the arguments e.g. outputText() without the text, string.
 func outputText(text string) {
 	fmt.Print(text)
+}
+
+// This is one way of returning the fv and frv values in Go see other
+// func calculateFutureValues(investmentAmount, expectedReturnRate, years float64) (float64, float64) {
+// 	fv := investmentAmount * math.Pow(1+expectedReturnRate/100, years)
+// 	frv := fv / math.Pow(1+inflationRate/100, years)
+
+// 	return fv, frv
+// }
+
+// Notice how fv and frv are declared with the type from the start; hence, no need to create the variable anymore
+func calculateFutureValues(investmentAmount, expectedReturnRate, years float64) (fv float64, frv float64) {
+	fv = investmentAmount * math.Pow(1+expectedReturnRate/100, years)
+	frv = fv / math.Pow(1+inflationRate/100, years)
+
+	return fv, frv
+
+	// return alone can work but it's difficult to read.
 }
