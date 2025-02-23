@@ -20,7 +20,7 @@ func main() {
 	}
 
 	fmt.Println("Welcome to Go Bank!")
-	fmt.Println(randomdata.PhoneNumber())
+	fmt.Println("Reach us 24hrs at: ", randomdata.PhoneNumber())
 
 	for {
 		presentBankingOptions()
